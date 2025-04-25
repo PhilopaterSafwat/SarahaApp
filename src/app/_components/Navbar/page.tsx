@@ -11,7 +11,6 @@ import { UserTokenContext } from "@/app/Context/userTokenContext";
 
 export default function Navbar() {
     const path = usePathname();
-
     const { token } = useContext(UserTokenContext)
 
 
