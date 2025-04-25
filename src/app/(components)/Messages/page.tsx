@@ -1,0 +1,51 @@
+"use client"
+// import Image from "next/image";
+// import userImage from "./../../../../public/felo.jpg"
+import { FaShareAlt } from "react-icons/fa";
+import AllMessages from "@/app/_components/AllMessages/page";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "@/app/redux/userSlice";
+
+export default function Messages() {
+    const [checkingAuth, setCheckingAuth] = useState(true);
+    const { user } = useSelector((state) => state)
+    const dispatch = useDispatch()
+    const { push } = useRouter()
+    useEffect(() => {
+        dispatch(getUser())
+        if (!localStorage.getItem("token")) {
+            push("/Login")
+        } else {
+            setCheckingAuth(false);
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log("User Data:", user);
+    }, [user]);
+    if (checkingAuth || user.isLoding) {
+        return <p className="text-center text-gray-500 mt-10">جاري التحقق...</p>;
+    }
+    return (
+        <>
+            <main className="p-4" dir="rtl">
+                {!user.isLoding && <div className="max-w-[700px] h-screen p-6 bg-white m-auto rounded-xl flex flex-col flex-wrap items-center">
+                    {/* UserImage */}
+                    {/* <div className="userImage w-[150px] h-[150px]  bg-blue-400 rounded-full overflow-hidden  mb-5">
+                        <Image src={userImage} alt="UserImage" className="w-full "></Image>
+                    </div> */}
+                    {/* UserName */}
+                    <h2 className="text-3xl mb-3">{user?.data.user?.userName}</h2>
+                    {/* userLink */}
+                    <p className="text-lg underline mb-3 cursor-pointer w-full text-center">https://felosafwat2000.whisper.pro</p>
+                    {/* button */}
+                    <button className="mb-3 w-full bg-blue-300 py-2 rounded-sm flex items-center justify-center gap-3  text-white"><span><FaShareAlt /></span> مشاركة </button>
+                    {/* All messages section */}
+                    <AllMessages messages={user.data?.messages}></AllMessages>
+                </div>}
+            </main>
+        </>
+    );
+}

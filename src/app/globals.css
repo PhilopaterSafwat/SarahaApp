@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+:root {
+  --background: #eff2f6;
+  --foreground: #171717;
+}
+.mian-background{
+  background-color: var(--background);
+}
+.active-nav{
+  background-color: oklch(62.3% 0.214 259.815);
+  color: white;
+}
