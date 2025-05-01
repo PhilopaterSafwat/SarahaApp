@@ -1,13 +1,21 @@
 "use client"
+import { UserTokenContext } from "@/app/Context/userTokenContext";
 import axios from "axios";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { RiMessage3Fill } from "react-icons/ri";
 import * as Yup from "yup";
 export default function Login() {
+    const userTokenContext = useContext(UserTokenContext);
+
+    if (!userTokenContext) {
+        throw new Error("UserTokenContext must be used within a UserTokenProvider");
+    }
+
+    const { setToken } = userTokenContext;
 
     const [Loading, setLoading] = useState(false)
     const { push } = useRouter()
@@ -23,6 +31,7 @@ export default function Login() {
                     "accept-language": "en"
                 }
             })
+            setToken(user.data.data.token)
             const token = user.data.data.token
 
             if (token) {
