@@ -1,20 +1,25 @@
 "use client";
-import { createContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
+export interface UserTokenContextType {
+    token: string;
+    setToken: (token: string) => void;
+}
 
 
-export const UserTokenContext = createContext(null);
+export const UserTokenContext = createContext<UserTokenContextType | null>(null);
 
 
-export default function UserTokenContextProvider(props) {
-    const [token, setToken] = useState(null);
+export default function UserTokenContextProvider({ children }: { children: ReactNode }) {
+    const [token, setToken] = useState<string>("");
     useEffect(() => {
-        if (localStorage.getItem('token')) {
-            setToken(localStorage.getItem('token'))
+        const storedToken = localStorage.getItem('token');
+        if (storedToken) {
+            setToken(storedToken);
         }
-    }, [])
+    }, []);
     return (
         <UserTokenContext.Provider value={{ token, setToken }}>
-            {props.children}
+            {children}
         </UserTokenContext.Provider>
     );
 }

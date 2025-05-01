@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 let tokenFromStorage = "";
 if (typeof window !== "undefined") {
     try {
-        tokenFromStorage = JSON.parse(localStorage.getItem("token")) || "";
+        const token = localStorage.getItem("token");
+        tokenFromStorage = token ? JSON.parse(token) : "";
     } catch (e) {
         tokenFromStorage = "";
     }

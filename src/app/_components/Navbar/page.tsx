@@ -11,10 +11,11 @@ import { UserTokenContext } from "@/app/Context/userTokenContext";
 
 export default function Navbar() {
     const path = usePathname();
-    const { token } = useContext(UserTokenContext)
+    const { token } = useContext(UserTokenContext) ||{}
 
 
     return (
+        
         <div className="text-3xl font-bold text-blue-500 px-2 md:px-40 py-4 flex items-center justify-between bg-white fixed inset-x-0">
             <Link href={"/"} className="Logo flex gap-2 items-center">
                 <RiMessage3Fill /><h1>whisper</h1>

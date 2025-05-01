@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "@/app/redux/userSlice";
+import { AppDispatch, RootState } from "@/app/redux/store";
 
 export default function Messages() {
     const [checkingAuth, setCheckingAuth] = useState(true);
-    const { user } = useSelector((state) => state)
-    const dispatch = useDispatch()
+    const { user } = useSelector((state:RootState) => state)
+    const dispatch = useDispatch<AppDispatch>()
     const { push } = useRouter()
     useEffect(() => {
         dispatch(getUser())

@@ -18,7 +18,7 @@ export const senMessage = createAsyncThunk("MessageSlice/senMessage", async (val
         // console.log(data.data);
 
         return data.data
-    } catch (error: unknown) {
+    } catch (error:any) {
         return rejectWithValue(error.response?.data || { message: "حدث خطأ غير متوقع" })
     }
 })

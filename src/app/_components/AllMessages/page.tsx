@@ -38,7 +38,7 @@ export default function AllMessages({ messages }: { messages: any }) {
                 </>
                 }
                 <div className='flex flex-col gap-5 mt-10'>
-                    {messages.map((message) => (
+                    {messages.map((message:any) => (
                         <div key={message._id} className='bg-gray-200 rounded-sm p-4 flex flex-col' dir={isArabic(message.message) ? "rtl" : "ltr"}>
                             <span>{message.message}</span>
                             <div className='buttons p-2 flex gap-4 self-end text-xl '>
