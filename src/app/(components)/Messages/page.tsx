@@ -59,7 +59,7 @@ export default function Messages() {
                     {/* UserName */}
                     <h2 className="text-3xl mb-3 capitalize">{user?.data.user?.userName}</h2>
                     {/* userLink */}
-                    <p onClick={(event) => CopyFunction(event)} className="text-md underline mb-3 cursor-pointer w-full text-center">https://saraha-app-t5sq.vercel.app/SendMessage/{user?.data?.user?._id}</p>
+                    <p onClick={(event) => CopyFunction(event)} className="break-all text-lg underline mb-3 cursor-pointer max-w-full text-center">https://saraha-app-t5sq.vercel.app/SendMessage/{user?.data?.user?._id}</p>
                     {/* button */}
                     <button onClick={(event) => CopyValue(event)} value={`https://saraha-app-t5sq.vercel.app/SendMessage/${user?.data?.user?._id}`} className="mb-3 w-full bg-blue-300 py-2 rounded-sm flex items-center justify-center gap-3  text-white cursor-pointer"><span><FaShareAlt /></span> مشاركة </button>
                     {/* All messages section */}

@@ -70,7 +70,7 @@ export default function AllMessages({ messages }: { messages: any }) {
                             <span>{message.message}</span>
                             <div className='buttons p-2 flex gap-4 self-end text-xl '>
                                 <button onClick={() => { handleFavorite(message._id) }} className={`bg-gray-300  p-2 rounded-sm cursor-pointer ${message.isFavorite ? "text-red-500" : ""}`}>
-                                    <MdOutlineFavorite className='hover:text-red-500' />
+                                    <MdOutlineFavorite  />
                                 </button>
                                 <button onClick={() => { handleDelete(message._id) }} className='bg-gray-300  p-2 rounded-sm cursor-pointer'>
                                     <FaTrash />
@@ -101,7 +101,7 @@ export default function AllMessages({ messages }: { messages: any }) {
                             <span>{message.message}</span>
                             <div className='buttons p-2 flex gap-4 self-end text-xl '>
                                 <button onClick={() => { handleFavorite(message._id) }} className={`bg-gray-300  p-2 rounded-sm cursor-pointer ${message.isFavorite ? "text-red-500" : ""}`}>
-                                    <MdOutlineFavorite className='hover:text-red-500' />
+                                    <MdOutlineFavorite  />
                                 </button>
                                 <button onClick={() => { handleDelete(message._id) }} className='bg-gray-300  p-2 rounded-sm cursor-pointer'>
                                     <FaTrash />
