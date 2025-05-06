@@ -8,7 +8,7 @@ const initialState = {
             userName: "",
             email: "",
             gender: "",
-
+            _id:""
         },
         messages: {
             message: ""
@@ -20,8 +20,6 @@ const initialState = {
 export const getUser = createAsyncThunk("UserSlice/getUser", async () => {
     const token = localStorage.getItem("token") || ""
     const { data } = await axios.get("https://whisperapi-production.up.railway.app/user/profile", { headers: { Authorization: `Bearer ${JSON.parse(token)}` } })
-    // console.log(data.data);
-
     return data.data
 })
 const UserSlice = createSlice({

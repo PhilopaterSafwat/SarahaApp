@@ -15,7 +15,6 @@ export const senMessage = createAsyncThunk("MessageSlice/senMessage", async (val
 
             }
         })
-        // console.log(data.data);
 
         return data.data
     } catch (error:any) {

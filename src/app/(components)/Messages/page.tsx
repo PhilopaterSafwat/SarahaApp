@@ -8,10 +8,29 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "@/app/redux/userSlice";
 import { AppDispatch, RootState } from "@/app/redux/store";
+import toast from "react-hot-toast";
 
 export default function Messages() {
+    function CopyFunction(event: any) {
+
+        const copyText = event.currentTarget.textContent
+
+
+        navigator.clipboard.writeText(copyText);
+        toast.success("تم نسخ الرابط بنجاح")
+    }
+    function CopyValue(event: any) {
+
+        const copyText = event.currentTarget.value
+
+
+        navigator.clipboard.writeText(copyText);
+
+
+        toast.success("تم نسخ الرابط بنجاح")
+    }
     const [checkingAuth, setCheckingAuth] = useState(true);
-    const { user } = useSelector((state:RootState) => state)
+    const { user } = useSelector((state: RootState) => state)
     const dispatch = useDispatch<AppDispatch>()
     const { push } = useRouter()
     useEffect(() => {
@@ -24,7 +43,7 @@ export default function Messages() {
     }, [])
 
     useEffect(() => {
-        console.log("User Data:", user);
+        // console.log("User Data:", user);
     }, [user]);
     if (checkingAuth || user.isLoding) {
         return <p className="text-center text-gray-500 mt-10">جاري التحقق...</p>;
@@ -38,11 +57,11 @@ export default function Messages() {
                         <Image src={userImage} alt="UserImage" className="w-full "></Image>
                     </div> */}
                     {/* UserName */}
-                    <h2 className="text-3xl mb-3">{user?.data.user?.userName}</h2>
+                    <h2 className="text-3xl mb-3 uppercase">{user?.data.user?.userName}</h2>
                     {/* userLink */}
-                    <p className="text-lg underline mb-3 cursor-pointer w-full text-center">https://felosafwat2000.whisper.pro</p>
+                    <p onClick={(event) => CopyFunction(event)} className="text-md underline mb-3 cursor-pointer w-full text-center">https://saraha-app-t5sq.vercel.app/SendMessage/{user?.data?.user?._id}</p>
                     {/* button */}
-                    <button className="mb-3 w-full bg-blue-300 py-2 rounded-sm flex items-center justify-center gap-3  text-white"><span><FaShareAlt /></span> مشاركة </button>
+                    <button onClick={(event) => CopyValue(event)} value={`https://saraha-app-t5sq.vercel.app/SendMessage/${user?.data?.user?._id}`} className="mb-3 w-full bg-blue-300 py-2 rounded-sm flex items-center justify-center gap-3  text-white cursor-pointer"><span><FaShareAlt /></span> مشاركة </button>
                     {/* All messages section */}
                     <AllMessages messages={user.data?.messages}></AllMessages>
                 </div>}
