@@ -23,20 +23,16 @@ export default function SendMessage() {
     const [Loading, setLoading] = useState(false)
     const dispatch = useDispatch<AppDispatch>()
     const { id } = useParams<{ id: string }>();
-    const userByid = useSelector((state: RootState) => state.userByid);
-    const message = useSelector((state: RootState) => state.message);
+    const {userByid} = useSelector((state: RootState) => state);
 
 
     useEffect(() => {
         dispatch(getUserById(id))
     }, [])
     useEffect(() => {
-        console.log(message);
-        // if (message.data?.newMessage) {
-        //     toast.success("تم ارسال الرسالة بنجاح")
-        //     setLoading(false)
-        // }
-    }, [message])
+        console.log(userByid);
+
+    }, [userByid])
 
     async function handleSend(values: sendMessage) {
         setLoading(true)
@@ -58,7 +54,7 @@ export default function SendMessage() {
         }, validationSchema: ""
         , onSubmit: handleSend
     })
-    if (!userByid.data?.user) {
+    if (!userByid?.data?.user?.userName) {
         return <p className="text-center text-gray-500 mt-10">جاري التحقق...</p>;
     }
     return (
@@ -70,7 +66,7 @@ export default function SendMessage() {
                         <Image src={userImage} alt="UserImage" className="w-full "></Image>
                     </div> */}
                     {/* UserName */}
-                    <h2 className="text-3xl mb-3">{userByid?.data?.user?.userName}</h2>
+                    <h2 className="text-3xl mb-3 capitalize">{userByid?.data?.user?.userName}</h2>
                     <form action="" className='w-full' onSubmit={formik.handleSubmit}>
                         <textarea value={formik.values.message} onChange={formik.handleChange} onBlur={formik.handleBlur} dir='auto' name="message" id="message" placeholder='اكتب رسالة صريحه' className=' placeholder:text-right placeholder:text-gray-400 w-full outline-0 bg-gray-100 rounded-md p-3 resize-none min-h-[150px]'></textarea>
                         {Loading ? <button className="flex justify-center bg-blue-500 text-white w-full py-2 rounded-sm cursor-not-allowed" type="button">

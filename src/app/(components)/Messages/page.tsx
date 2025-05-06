@@ -57,7 +57,7 @@ export default function Messages() {
                         <Image src={userImage} alt="UserImage" className="w-full "></Image>
                     </div> */}
                     {/* UserName */}
-                    <h2 className="text-3xl mb-3 uppercase">{user?.data.user?.userName}</h2>
+                    <h2 className="text-3xl mb-3 capitalize">{user?.data.user?.userName}</h2>
                     {/* userLink */}
                     <p onClick={(event) => CopyFunction(event)} className="text-md underline mb-3 cursor-pointer w-full text-center">https://saraha-app-t5sq.vercel.app/SendMessage/{user?.data?.user?._id}</p>
                     {/* button */}

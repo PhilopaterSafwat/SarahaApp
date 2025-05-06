@@ -22,7 +22,7 @@ export const getUserById = createAsyncThunk("UserSlice/getUser", async (id: stri
 
             }
         })
-
+        
         return data.data
     } catch (error) {
         console.log(error);
