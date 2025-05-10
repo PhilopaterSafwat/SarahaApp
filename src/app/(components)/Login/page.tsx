@@ -47,7 +47,7 @@ export default function Login() {
                         toast.error(error.response.data.msg)
                     }
                 } else {
-                    toast.error("Something went wrong, please try again.")
+                    toast.error("البريد الإلكتروني أو كلمة المرور غير صالحة")
                     console.error(error)
                 }
             }
@@ -57,7 +57,7 @@ export default function Login() {
     }
     const validationSchema = Yup.object().shape({
         email: Yup.string().email('البريد الالكتروني خطاء').required('البريد الالكتروني مطلوب'),
-        password: Yup.string().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'الحد الأدنى ثمانية أحرف، على الأقل حرف كبير واحد، وحرف صغير واحد ورقم واحد').required('كلمة المرور مطلوبه'),
+        password: Yup.string().required('كلمة المرور مطلوبه'),
     })
     const formik = useFormik({
         initialValues: {

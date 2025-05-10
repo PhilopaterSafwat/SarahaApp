@@ -43,7 +43,10 @@ export default function Messages() {
     }, [])
 
     useEffect(() => {
-        // console.log("User Data:", user);
+        console.log("User Data:", user);
+        // if (user.data === "TokenExpiredError: jwt expired") {
+        //     push("/Login")
+        // }
     }, [user]);
     if (checkingAuth || user.isLoding) {
         return <p className="text-center text-gray-500 mt-10">جاري التحقق...</p>;

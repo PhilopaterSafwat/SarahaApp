@@ -8,7 +8,7 @@ const initialState = {
             userName: "",
             email: "",
             gender: "",
-            _id:""
+            _id: ""
         },
         messages: {
             message: ""
@@ -19,14 +19,25 @@ const initialState = {
 }
 export const getUser = createAsyncThunk("UserSlice/getUser", async () => {
     const token = localStorage.getItem("token") || ""
-    const { data } = await axios.get("https://whisperapi-production.up.railway.app/user/profile", { headers: { Authorization: `Bearer ${JSON.parse(token)}` } })
-    return data.data
+    try {
+        const { data } = await axios.get("https://whisperapi-production.up.railway.app/user/profile", { headers: { Authorization: `Bearer ${JSON.parse(token)}` } })
+        return data.data
+    } catch (error: any) {
+        console.log(error);
+        console.log(error.response.data.msg);
+        return error.response.data.msg
+    }
+
 })
 const UserSlice = createSlice({
     name: 'UserSlice',
     initialState,
     extraReducers: (bulider) => {
         bulider.addCase(getUser.fulfilled, (state, action) => {
+            if (action.payload === "TokenExpiredError: jwt expired") {
+                localStorage.removeItem("token")
+                return;
+            }
             state.data = action.payload
             state.isLoding = false
         });

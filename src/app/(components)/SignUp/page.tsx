@@ -28,8 +28,8 @@ export default function SignUp() {
                     "accept-language": "en"
                 }
             })
-            console.log(user);
             if (user?.data?.data) {
+                toast.success("تم إنشاء الحساب بنجاح، تحقق من بريدك الإلكتروني للتفعيل.")
             }
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -54,7 +54,7 @@ export default function SignUp() {
     const validationSchema = Yup.object().shape({
         userName: Yup.string().min(3, 'الحد الأدنى للاسم هو 3').max(10, 'الجد الأفصي للاسم هو 10').required('الاسم مطلوب'),
         email: Yup.string().email('البريد الالكتروني خطاء').required('البريد الالكتروني مطلوب'),
-        password: Yup.string().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'الحد الأدنى ثمانية أحرف، على الأقل حرف كبير واحد، وحرف صغير واحد ورقم واحد').required('كلمة المرور مطلوبه'),
+        password: Yup.string().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'يجب أن تتكون من الأحرف الإنجليزية الكبيرة والصغيرة، الأرقام، والرموز المحددة [ @$!%*?& ] مثال Passw0rd!').required('كلمة المرور مطلوبه'),
         confirmationPassword: Yup.string().oneOf([Yup.ref('password')], 'كلمة المرور غير متطابقة').required('اعاده كلمة المرور مطلوبه'),
         phone: Yup.string().matches(/^(002)?01[0125][0-9]{8}$/, 'يجب أن يكون رقم الهاتف مصريًا').required('رقم الهاتق مطلوب')
     })
